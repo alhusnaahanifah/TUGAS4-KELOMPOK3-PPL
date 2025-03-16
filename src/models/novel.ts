@@ -42,9 +42,9 @@ export const getHighestRatedNovel = (): Novel | undefined => {
   };
   
 // 3. Lihat detail novel berdasarkan judul
-export const getNovelByTitle = (title: string): Novel | undefined => {
+export const getNovelsByTitle = (title: string): Novel[] => {
   const novels = readNovels();
-  return novels.find((novel) => novel.title === title);
+  return novels.filter((novel) => novel.title.toLowerCase().includes(title.toLowerCase()));
 };
 
 // 4. Update novel berdasarkan judul

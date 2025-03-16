@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import {
   getNovels,
-  getNovelByTitle,
+  getNovelsByTitle,
   addNovel,
   updateNovel,
   deleteNovel,
@@ -35,14 +35,14 @@ router.get('/highest-rated', (req: Request, res: Response) => {
   
 // 3. Lihat detail novel berdasarkan judul
 router.get('/:title', (req: Request, res: Response) => {
-  const novelTitle = req.params.title;
-  const novel = getNovelByTitle(novelTitle);
-  if (novel) {
-    res.json(novel);
+  const novels = getNovelsByTitle(req.params.title);
+  if (novels.length > 0) {
+    res.json(novels);  // ✅ Pastikan API mengembalikan array
   } else {
-    res.status(404).json({ message: 'Novel not found' });
+    res.status(404).json({ message: 'Novel tidak ditemukan' });
   }
 });
+
 
 // 4. Update novel berdasarkan judul
 router.put('/:title', (req: Request, res: Response) => {

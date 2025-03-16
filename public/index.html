@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Novel Collection</h1>
+
+    <button onclick="loadNovels()">Lihat Daftar Novel</button>
+    <button onclick="getHighestRated()">Lihat Novel Terbaik</button>
+
+    <h3>Daftar Novel:</h3>
+    <ul id="novel-list"></ul>
+
+    <h3>Cari Novel</h3>
+    <input type="text" id="search-title" placeholder="Judul novel">
+    <button onclick="getNovelsByTitle()">Cari</button>
+
+    <h3>Tambah Novel</h3>
+    <input type="text" id="add-title" placeholder="Judul">
+    <input type="text" id="add-author" placeholder="Penulis">
+    <input type="number" id="add-year" placeholder="Tahun">
+    <input type="text" id="add-genre" placeholder="Genre">
+    <input type="number" id="add-pages" placeholder="Jumlah Halaman">
+    <input type="number" step="0.1" id="add-rating" placeholder="Rating">
+    <textarea id="add-summary" placeholder="Ringkasan"></textarea>
+    <button onclick="addNovel()">Tambah</button>
+
+    <h3>Perbarui Novel</h3>
+    <input type="text" id="update-title" placeholder="Judul novel">
+    <input type="number" step="0.1" id="update-rating" placeholder="Rating baru">
+    <input type="number" id="update-pages" placeholder="Jumlah halaman baru">
+    <button onclick="updateNovel()">Update</button>
+
+    <h3>Hapus Novel</h3>
+    <input type="text" id="delete-title" placeholder="Judul novel">
+    <button onclick="deleteNovel()">Hapus</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
