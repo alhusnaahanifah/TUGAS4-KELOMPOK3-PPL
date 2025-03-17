@@ -5,39 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novel Collection</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1>Novel Collection</h1>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> NovelHub</h1>
+            <p>Koleksi Novel Terbaik Untuk Anda</p>
+        </header>
 
-    <button onclick="loadNovels()">Lihat Daftar Novel</button>
-    <button onclick="getHighestRated()">Lihat Novel Terbaik</button>
+        <div class="actions-bar">
+            <button class="btn" onclick="showHomePage()"><i class="fas fa-home"></i> Beranda</button>
+            <button class="btn" onclick="showNovelList()"><i class="fas fa-list"></i> Lihat Daftar Novel</button>
+            <button class="btn" onclick="showBestNovel()"><i class="fas fa-star"></i> Novel Rating Tertinggi</button>
+        </div>
 
-    <h3>Daftar Novel:</h3>
-    <ul id="novel-list"></ul>
+        <div id="alert-container"></div>
 
-    <h3>Cari Novel</h3>
-    <input type="text" id="search-title" placeholder="Judul novel">
-    <button onclick="getNovelsByTitle()">Cari</button>
+        <!-- Home page (search) section -->
+        <section id="home-section" class="section">
+            <h3><i class="fas fa-search"></i> Cari Novel</h3>
+            <div class="form-group">
+                <input type="text" id="search-title" class="form-control" placeholder="Judul novel">
+                <button class="btn" onclick="getNovelsByTitle()">Cari</button>
+            </div>
+            
+            <div id="search-results">
+                <ul id="search-list"></ul>
+            </div>
+        </section>
 
-    <h3>Tambah Novel</h3>
-    <input type="text" id="add-title" placeholder="Judul">
-    <input type="text" id="add-author" placeholder="Penulis">
-    <input type="number" id="add-year" placeholder="Tahun">
-    <input type="text" id="add-genre" placeholder="Genre">
-    <input type="number" id="add-pages" placeholder="Jumlah Halaman">
-    <input type="number" step="0.1" id="add-rating" placeholder="Rating">
-    <textarea id="add-summary" placeholder="Ringkasan"></textarea>
-    <button onclick="addNovel()">Tambah</button>
+        <!-- Novel list section -->
+        <section id="novel-list-section" class="section" style="display: none;">
+            <h3><i class="fas fa-book"></i> Daftar Novel</h3>
+            <div id="loading-novels" class="loading" style="display: none;">Memuat daftar novel...</div>
+            <ul id="novel-list"></ul>
+            <div class="pagination">
+                <button id="prev-page" class="btn" onclick="previousPage()" disabled><i class="fas fa-chevron-left"></i> Sebelumnya</button>
+                <span id="page-indicator">Halaman 1</span>
+                <button id="next-page" class="btn" onclick="nextPage()"><i class="fas fa-chevron-right"></i> Berikutnya</button>
+            </div>
+        </section>
 
-    <h3>Perbarui Novel</h3>
-    <input type="text" id="update-title" placeholder="Judul novel">
-    <input type="number" step="0.1" id="update-rating" placeholder="Rating baru">
-    <input type="number" id="update-pages" placeholder="Jumlah halaman baru">
-    <button onclick="updateNovel()">Update</button>
+        <!-- Best novel section -->
+        <section id="best-novel-section" class="section" style="display: none;">
+            <h3><i class="fas fa-trophy"></i> Novel Terbaik</h3>
+            <div id="best-novel-container"></div>
+        </section>
 
-    <h3>Hapus Novel</h3>
-    <input type="text" id="delete-title" placeholder="Judul novel">
-    <button onclick="deleteNovel()">Hapus</button>
+        <!-- Add novel section -->
+        <section id="add-novel-section" class="section">
+            <h3><i class="fas fa-plus-circle"></i> Tambah Novel</h3>
+            <div class="form-group">
+                <input type="text" id="add-title" class="form-control" placeholder="Judul">
+                <input type="text" id="add-author" class="form-control" placeholder="Penulis">
+            </div>
+            <div class="form-group">
+                <input type="number" id="add-year" class="form-control" placeholder="Tahun">
+                <input type="text" id="add-genre" class="form-control" placeholder="Genre">
+            </div>
+            <div class="form-group">
+                <input type="number" min="1" id="add-pages" class="form-control" placeholder="Jumlah Halaman">
+                <input type="number" step="0.1" min="0" max="10" id="add-rating" class="form-control" placeholder="Rating (0-10)">
+            </div>
+            <div class="form-group">
+                <textarea id="add-summary" class="form-control" placeholder="Ringkasan novel"></textarea>
+            </div>
+            <button class="btn btn-accent" onclick="addNovel()"><i class="fas fa-plus"></i> Tambah Novel</button>
+        </section>
+    </div>
+
+    <!-- Modal for edit and delete -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-title"></h3>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
